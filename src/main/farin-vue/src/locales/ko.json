@@ -1,0 +1,34 @@
+{
+    "msg": {
+        "com": {
+            "recievedData": "서버 데이터를 가져왔습니다.",
+            "systemErr": "오류가 발생했습니다."
+        },
+        "ctn": {
+            "aboutMsg": "여기는 임시 페이지입니다.",
+            "youdidit": "실행이 되었도다!"
+        }
+    },
+    "lbl": {
+        "menu": {
+            "ajaxTest": "Ajax 테스트",
+            "stateTest": "State 테스트"
+        },
+        "btn": {
+            "viewServer": "Ajax실행",
+            "changeState": "State변경",
+            "viewState": "State조회",
+            "changeX": "{0}변경"
+        },
+        "etc": {
+            "curLocale": "한국어",
+            "korean": "한국어",
+            "english": "영어",
+            "chinese": "중국어",
+            "data1": "데이터1",
+            "data2": "데이터2",
+            "data3": "State",
+            "savedStateVal": "저장된 State 값"
+        }
+    }
+}

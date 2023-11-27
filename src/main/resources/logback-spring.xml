@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="30 seconds">
+
+	<springProfile name="local">
+		<appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+			<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+				<pattern>[%d{HH:mm:ss.SSS}][%-5level][%logger{36}.%method:line%line] - %msg%n</pattern>
+			</encoder>
+		</appender>
+	
+		<appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+			<file>C:/plm-project/logs/applog/farinvue.log</file>
+			<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+				<fileNamePattern>C:/plm-project/logs/applog/farinvue.%d{yyyy-MM-dd}.log</fileNamePattern>
+<!-- 				<timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP"> -->
+<!--           			<maxFileSize>50mb</maxFileSize> -->
+<!--         		</timeBasedFileNamingAndTriggeringPolicy> -->
+				<maxHistory>30</maxHistory>
+			</rollingPolicy>
+			<encoder>
+				<pattern>[%d{HH:mm:ss.SSS}][%-5level][%logger.%method:line%line] - %msg%n</pattern>
+			</encoder>
+		</appender>	
+		
+		<logger name="farin" level="debug" additivity="false">
+			<appender-ref ref="console" />
+		</logger>		
+		<logger name="org.springframework" level="info" additivity="false">
+			<appender-ref ref="console" />
+		</logger>
+		<logger name="org.apache" level="info" additivity="false">
+			<appender-ref ref="console" />
+		</logger>
+		<logger name="com.zaxxer" level="error" additivity="false">
+			<appender-ref ref="console" />
+		</logger>
+		<logger name="springfox" level="error" additivity="false">
+			<appender-ref ref="console" />
+		</logger>
+		<root level="debug">
+			<appender-ref ref="console" />
+		</root>
+	</springProfile>
+</configuration>

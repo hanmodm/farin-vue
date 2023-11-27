@@ -1,0 +1,34 @@
+{
+    "msg": {
+        "com": {
+            "recievedData": "服务器数据已检索。",
+            "systemErr": "发生错误。"
+        },
+        "ctn": {
+            "aboutMsg": "这是一个临时页面。",
+            "youdidit": "它已经被执行了!"
+        }
+    },
+    "lbl": {
+        "menu": {
+            "ajaxTest": "Ajax实验",
+            "stateTest": "状态实验"
+        },
+        "btn": {
+            "viewServer": "执行Ajax",
+            "changeState": "改变状态",
+            "viewState": "状态查询",
+            "changeX": "{0}改变"
+        },
+        "etc": {
+            "curLocale": "韩文",
+            "korean": "韩文",
+            "english": "英文",
+            "chinese": "中文",
+            "data1": "数据1",
+            "data2": "数据2",
+            "data3": "状态",
+            "savedStateVal": "保存的状态值"
+        }
+    }
+}

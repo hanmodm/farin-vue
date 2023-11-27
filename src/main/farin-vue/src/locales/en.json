@@ -1,0 +1,34 @@
+{
+    "msg": {
+        "com": {
+            "recievedData": "Success to get a server data.",
+            "systemErr": "occured a system error."
+        },
+        "ctn": {
+            "aboutMsg": "This is an about page",
+            "youdidit": "You did it!"
+        }
+    },
+    "lbl": {
+        "menu": {
+            "ajaxTest": "Ajax test",
+            "stateTest": "State test"
+        },
+        "btn": {
+            "viewServer": "Run ajax",
+            "changeState": "Change state",
+            "viewState": "View state",
+            "changeX": "Change {0}"
+        },
+        "etc": {
+            "curLocale": "English",
+            "korean": "Korean",
+            "english": "English",
+            "chinese": "Chinese",
+            "data1": "Data1",
+            "data2": "Data2",
+            "data3": "State",
+            "savedStateVal": "Saved state value"
+        }
+    }
+}
