@@ -8,6 +8,12 @@ server:
         mappedfile: false
     session:
       timeout: 14400  # 4hr 
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+      force-request: true
+      force-response: true
   tomcat:
     max-http-form-post-size: -1 # the maximum size of the whole post request
     max-swallow-size: -1        # the maximum size of a request body
@@ -51,13 +57,6 @@ spring:
     exclude: org.springframework.boot.autoconfigure.web.servlet.error.ErrorMvcAutoConfiguration
   messages: 
     use-code-as-default-message: true
-  http:
-    encoding:
-      charset: UTF-8
-      enabled: true
-      force: true
-      force-request: true
-      force-response: true
   servlet:  
     multipart:
       enabled: false
