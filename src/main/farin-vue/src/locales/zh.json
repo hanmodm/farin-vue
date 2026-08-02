@@ -12,7 +12,9 @@
     "lbl": {
         "menu": {
             "ajaxTest": "Ajax实验",
-            "stateTest": "状态实验"
+            "stateTest": "状态实验",
+            "tcpIpSendTest": "TCP/IP Client",
+            "tcpIpServerTest": "TCP/IP Server"
         },
         "btn": {
             "viewServer": "执行Ajax",

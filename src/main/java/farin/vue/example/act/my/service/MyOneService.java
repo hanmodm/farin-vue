@@ -1,4 +1,4 @@
-package farin.vue.example.act.my.servier;
+package farin.vue.example.act.my.service;
 
 import java.util.Map;
 

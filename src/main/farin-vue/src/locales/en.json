@@ -12,7 +12,9 @@
     "lbl": {
         "menu": {
             "ajaxTest": "Ajax test",
-            "stateTest": "State test"
+            "stateTest": "State test",
+            "tcpIpSendTest": "TCP/IP Client",
+            "tcpIpServerTest": "TCP/IP Server"
         },
         "btn": {
             "viewServer": "Run ajax",

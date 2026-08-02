@@ -25,6 +25,11 @@ export default defineConfig({
         target: 'http://localhost:8780',
         changeOrigin: true
       }
+      ,'/socket' : {
+        target: 'http://localhost:9102',
+        ws: true,
+        changeOrigin: true
+      }
     }
   }
 })
