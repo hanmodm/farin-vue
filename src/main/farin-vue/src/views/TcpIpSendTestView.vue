@@ -6,41 +6,59 @@
     ,sendMessage: null
     ,receivedMessage: []
     ,isConnected: false
-    ,connect() {
+    ,async connect() {
       if (socketInfo.isConnected) return
       if (!socketInfo.server) {
         alert("IP, PORT 정보를 입력해주세요.")
         return
       }
-      try {
-        socketInfo.instance = new WebSocket(`ws://${socketInfo.server}/socket`)
-        socketInfo.isConnected = true
-        socketInfo.instance.onopen = socketInfo.onOpen
-        socketInfo.instance.onmessage = socketInfo.onReceivedMessage
-        socketInfo.instance.onclose = socketInfo.onClose
-        socketInfo.instance.onerror = socketInfo.onError
-      } catch(e) {
-        socketInfo.disconnect()
-      }
+      const ws = new WebSocket(`ws://${socketInfo.server}/socket`)
+
+      return new Promise((resolve, reject) => {
+        ws.onopen = () => {
+          socketInfo.instance = ws
+          socketInfo.isConnected = true
+          socketInfo.instance.onmessage = socketInfo.onReceivedMessage
+          socketInfo.instance.onclose = socketInfo.onClose
+          socketInfo.instance.onerror = socketInfo.onError
+          resolve(true)
+        }
+        ws.onerror=(e) => {
+          console.error(e)
+          socketInfo.instance = null
+          socketInfo.isConnected = false
+          resolve(false)
+        }
+      })
     }
     ,disconnect() {
       try {
-        if (!!socketInfo.instance) {
+        if (!!socketInfo.isConnected) {
           socketInfo.instance.close()
-          socketInfo.isConnected = false
         }
-      } catch(e) { }
+      } catch(e) {
+        console.error(e)
+      } finally {
+        socketInfo.isConnected = false
+        socketInfo.instance = null
+        socketInfo.receivedMessage = []
+      }
     }
-    ,onOpen() {
-      socketInfo.isConneted = true
-      socketInfo.receivedMessage.push(socketInfo.server + ' 접속에 성공했습니다.')
-    }
-    ,onReceivedMessage(e) {
-      socketInfo.receivedMessage.push(`수신: [${e.data}]`)
+    ,onReceivedMessage(v) {
+      let value = null
+      try { value = JSON.parse(v.data) } catch(e) { value = { message: v.data }}
+      if (value === false) {
+        alert("수신처 연결 정보가 존재하지 않습니다.")
+        return
+      }
+      socketInfo.receivedMessage.push(`수신: [${value.message}]`)
+      console.log(value)
     }
     ,onSendMessage() {
-      if (!socketInfo.isConnected || !socketInfo.sendMessage || !socketInfo.sendMessage?.trim()) return
-      socketInfo.instance.send(socketInfo.sendMessage.trim())
+      let addr = socketInfo.client?.trim().split(":")
+      if (!addr[0] || !addr[1] || !socketInfo.isConnected || (typeof(str) === "string" && (!str || !str.trim())) ) return
+      let sendMessage = JSON.stringify({ to: addr[0]+":"+addr[1], message: socketInfo.sendMessage})
+      socketInfo.instance.send(sendMessage)
     }
     ,onClose() {
       socketInfo.isConnected = false
@@ -51,7 +69,6 @@
       socketInfo.receivedMessage.push(`오류: [통신 오류 발생]`)
     }
   })
-  
 
   onUnmounted(() => {
     socketInfo.disconnect()
@@ -71,6 +88,7 @@
     </v-row>
     <v-row align="center" no-gutters>
       <v-col>
+        <v-text-field v-ripple label="수신처" v-model="socketInfo.client"></v-text-field>
         <v-text-field v-ripple label="전송" v-model="socketInfo.sendMessage"></v-text-field>
         <v-btn variant="outlined" @click="socketInfo.onSendMessage">전송</v-btn>
       </v-col>

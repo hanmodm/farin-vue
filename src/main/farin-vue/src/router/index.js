@@ -3,7 +3,6 @@ import HomeView from '../views/HomeView.vue'
 import AjaxTestView from '../views/AjaxTestView.vue'
 import StateTestView from '../views/StateTestView.vue'
 import TcpIpSendTestView from '../views/TcpIpSendTestView.vue'
-import TcpIpServerTestView from '../views/TcpIpServerTestView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -30,11 +29,6 @@ const router = createRouter({
       path: '/stateTest',
       name: 'state테스트',
       component: StateTestView
-    },
-    {
-      path: '/tcpIpServerTest',
-      name: '소켓서버',
-      component: TcpIpServerTestView
     },
     {
       path: '/tcpIpSendTest',
