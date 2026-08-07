@@ -2,7 +2,7 @@
 const { WebSocketServer } = require('ws')
 
 function wsServer() {
-  const wss = new WebSocketServer({ port: 9102 })
+  const wss = new WebSocketServer({ port: 9302 })
 
   wss.on('connection', (ws) => {
     console.log('클라이언트 연결됨')
@@ -18,7 +18,7 @@ function wsServer() {
     console.log(ws)
   })
 
-  console.log('WebSocket 서버가 9102 포트에서 실행 중입니다.')
+  console.log('WebSocket 서버가 9302 포트에서 실행 중입니다.')
 }
 
 if (require.main === module) {
