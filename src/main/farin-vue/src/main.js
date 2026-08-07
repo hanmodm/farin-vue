@@ -24,5 +24,4 @@ app.use(router).use(i18n).use(store).use(vuetify)
 app.config.globalProperties.$axios = axios
 app.config.globalProperties.$commUtil = new CommUtil(app)
 
-
 app.mount('#app')
