@@ -1,3 +1,5 @@
+import { loadLocale } from '@/i18n'
+
 class CommUtil {
     app = null
     constructor(vueApp) {
@@ -28,10 +30,11 @@ class CommUtil {
             return false
         }
     }
-    changeLocale(lc) {
-        if (!this.app || !this.app._instance) return
+    async changeLocale(lc='ko') {
+        /*if (!this.app || !this.app._instance) return
         let $lc = this.app._instance.ctx.$i18n.locale
-        this.app._instance.ctx.$i18n.locale = !lc ? $lc : lc
+        this.app._instance.ctx.$i18n.locale = !lc ? $lc : lc*/
+        await loadLocale(lc)
     }
 }
 

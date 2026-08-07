@@ -23,5 +23,5 @@ app.use(router).use(i18n).use(store).use(vuetify)
 
 app.config.globalProperties.$axios = axios
 app.config.globalProperties.$commUtil = new CommUtil(app)
-
+app.config.globalProperties.$commUtil.changeLocale()
 app.mount('#app')
