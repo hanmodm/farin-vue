@@ -15,7 +15,7 @@ function wsServer() {
 
   wss.on('connection', (ws, req) => {
     let headers = req.headers
-    let rawIp = headers["x-forwarded-for"]?.split(",")[0] || headers["origin"].replace(/^https?:\/\/([^/]+).*$/, '$1').split(":")[0] || req.socket.remotedAddress
+    let rawIp = headers["x-forwarded-for"]?.split(",")[0] || req.socket.remotedAddress
     let port = req.socket.remotePort
     let clientAddr = `${rawIp}:${port}`
     
