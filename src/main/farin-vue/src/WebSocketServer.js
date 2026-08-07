@@ -2,7 +2,7 @@
 const { WebSocketServer } = require('ws')
 
 function wsServer() {
-  const wss = new WebSocketServer({ port: 9102 })
+  const wss = new WebSocketServer({ port: 8102 })
   const clients = {}
   let callPageAddr = ""
   const TIME_ZONE = 3240 * 10000
