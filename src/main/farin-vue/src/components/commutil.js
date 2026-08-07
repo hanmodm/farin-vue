@@ -20,7 +20,7 @@ class CommUtil {
             return (typeof o === "number" && zeroIsEmpty) || typeof o !== "number" ? true : false
         } else if (typeof o === "object") {
             if (!!o.length) {
-                return o.length === 0 ? true : false                
+                return o.length === 0 ? true : false
             } else {
                 return Object.keys(o).length === 0 && o.constructor === Object
             }

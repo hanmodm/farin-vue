@@ -2,7 +2,8 @@
 const { WebSocketServer } = require('ws')
 
 function wsServer() {
-  const wss = new WebSocketServer({ port: 8102 })
+
+  const wss = new WebSocketServer({ port: 9302 })
   const clients = {}
   let callPageAddr = ""
   const TIME_ZONE = 3240 * 10000
@@ -50,7 +51,13 @@ function wsServer() {
     })
     clients[clientAddr] = ws
   })
-  console.log(`[${getDateTime()}] WebSocket 서버가 9102 포트에서 실행 중입니다.`)
+  
+  console.log(`[${getDateTime()}] WebSocket 서버가 9302 포트에서 실행 중입니다.`)
+  
+  wss.on("close", ws => {
+    console.log("클라이언트가 접속을 해제했습니다.")
+    console.log(ws)
+  })
 }
 
 if (require.main === module) {
