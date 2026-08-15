@@ -20,7 +20,10 @@
       <nav class="ml-2">
         <RouterLink to="/ajaxTest">{{ $t("lbl.menu.ajaxTest") }}</RouterLink>
         <RouterLink to="/stateTest">{{ $t("lbl.menu.stateTest") }}</RouterLink>
+      </nav>
+      <nav class="ml-2">
         <RouterLink to="/tcpIpSendTest">{{ $t("lbl.menu.tcpIpSendTest") }}</RouterLink>
+        <RouterLink to="/childTest">{{ $t("lbl.menu.childTest") }}</RouterLink>
       </nav>
     </div>
   </header>

@@ -14,7 +14,8 @@
             "ajaxTest": "Ajax实验",
             "stateTest": "状态实验",
             "tcpIpSendTest": "TCP/IP Client",
-            "tcpIpServerTest": "TCP/IP Server"
+            "tcpIpServerTest": "TCP/IP Server",
+            "childTest": "子组件继承测试"
         },
         "btn": {
             "viewServer": "执行Ajax",
