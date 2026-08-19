@@ -4,6 +4,7 @@
   const socketInfo = reactive({
      instance: null
     ,sendMessage: null
+    ,test: { value: null, enabled: true, visible: true }
     ,receivedMessage: []
     ,isConnected: false
     ,async connect() {
@@ -70,6 +71,14 @@
     }
   })
 
+  const toggleTest = () => {
+    socketInfo.test.value = socketInfo.test.value === "변경" ? "원복" : "변경"
+    socketInfo.test.enabled = !socketInfo.test.enabled
+  }
+  const toggleTest2 = () => {
+    socketInfo.test.visible = !socketInfo.test.visible
+  }
+
   onUnmounted(() => {
     socketInfo.disconnect()
   })
@@ -90,7 +99,10 @@
       <v-col>
         <v-text-field v-ripple label="수신처" v-model="socketInfo.client"></v-text-field>
         <v-text-field v-ripple label="전송" v-model="socketInfo.sendMessage"></v-text-field>
+        <v-text-field v-ripple label="객체테스트" v-model="socketInfo.test.value" :disabled="!socketInfo.test.enabled" :style="{ display: socketInfo.test.visible ? '' : 'none' }"></v-text-field>
         <v-btn variant="outlined" @click="socketInfo.onSendMessage">전송</v-btn>
+        <v-btn variant="outlined" @click="toggleTest">토글</v-btn>
+        <v-btn variant="outlined" @click="toggleTest2">숨김</v-btn>
       </v-col>
     </v-row>
     <v-row>

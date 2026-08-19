@@ -31,6 +31,7 @@
       emit("update:modelValue", {...view})
     }
   }
+  
   const refInputTxt = computed({
      get: () => view.inputTxt
     ,set: (v) => viewMethod.setAttr("inputTxt", v)
