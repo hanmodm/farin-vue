@@ -17,6 +17,7 @@
         <DxPaging :enabled="false"/>
         <DxScrolling :mode="'virtual'"/>
     </DxDataGrid> -->
+    <!-- 옵션 변경에 따라 컴포넌트 reload 처리를 강제해야 기능 정상 작동함. repaint 처리는 이벤트 reload 처리가 안됨 -->
     <DxDateRangeBox
       v-if="viewRange.dateType=== 'Y'"
       v-model:value="viewRange.dates"
