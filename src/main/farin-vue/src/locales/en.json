@@ -16,7 +16,8 @@
             "tcpIpSendTest": "TCP/IP Client",
             "tcpIpServerTest": "TCP/IP Server",
             "childTest": "Child inherit test",
-            "dxGridTest": "DxDataGrid Test"
+            "dxGridTest": "DxDataGrid Test",
+            "dxDateTest": "DxDate Test"
         },
         "btn": {
             "viewServer": "Run ajax",

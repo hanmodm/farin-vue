@@ -27,6 +27,7 @@
       </nav>
       <nav class="ml-2">
         <RouterLink to="/dxGridTest">{{ $t("lbl.menu.dxGridTest") }}</RouterLink>
+        <RouterLink to="/dxDateTest">{{ $t("lbl.menu.dxDateTest") }}</RouterLink>
       </nav>
     </div>
   </header>

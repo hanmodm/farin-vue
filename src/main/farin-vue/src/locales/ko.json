@@ -16,7 +16,8 @@
             "tcpIpSendTest": "TCP/IP 클라이언트 테스트",
             "tcpIpServerTest": "TCP/IP 서버 테스트",
             "childTest": "Child상속테스트",
-            "dxGridTest": "DxDataGrid 테스트"
+            "dxGridTest": "DxDataGrid 테스트",
+            "dxDateTest": "DxDate 테스트"
         },
         "btn": {
             "viewServer": "Ajax실행",

@@ -5,6 +5,7 @@ import StateTestView from '../views/StateTestView.vue'
 import TcpIpSendTestView from '../views/TcpIpSendTestView.vue'
 import ChildTest from '../views/ChildTest.vue'
 import DxGridTest from '../views/DxGridTest.vue'
+import DxDateTest from '../views/DxDateTest.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -46,6 +47,11 @@ const router = createRouter({
       path: '/dxGridTest',
       name: 'DxDataGrid테스트',
       component: DxGridTest
+    },
+    {
+      path: '/dxDateTest',
+      name: 'DxDate테스트',
+      component: DxDateTest
     }
   ]
 })

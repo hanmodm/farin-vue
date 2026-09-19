@@ -16,7 +16,8 @@
             "tcpIpSendTest": "TCP/IP Client",
             "tcpIpServerTest": "TCP/IP Server",
             "childTest": "子组件继承测试",
-            "dxGridTest": "DxDataGrid Test"
+            "dxGridTest": "DxDataGrid Test",
+            "dxDateTest": "DxDate Test"
         },
         "btn": {
             "viewServer": "执行Ajax",
