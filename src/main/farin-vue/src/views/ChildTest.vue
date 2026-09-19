@@ -1,6 +1,6 @@
 <template>
   <v-container >
-    <ChildTest01 ref="viewRef" :model-value="view" :DS_COMMONINFO="DS_COMMONINFO" @update:model-value="Object.assign(view, $event)"/>
+    <ChildTest01 ref="viewRef" :my-test="myTest" @callback="()=>{ console.log('isOk!!')}" :model-value="view" :DS_COMMONINFO="DS_COMMONINFO" @update:model-value="Object.assign(view, $event)"/>
     <v-btn variant="outlined" @click="viewMethod.onBtnClick">확인</v-btn>
   </v-container>
 </template>
@@ -12,6 +12,7 @@
   const DS_COMMONINFO = ref([{ id: '001', nm: '이름01' }])
   let textVal = ref("test")
   const viewRef = ref(null)
+  const myTest = ref("OK")
   const view = reactive({
      parentValue: "myTest"
   })
@@ -81,6 +82,8 @@
       console.log(`Parent에서 변경 후: ${view.inputTxt}`)
       //innerFunc()   // ChildTest_01 scope 내 함수이므로 외부에서는 호출 불가
       outFunc()
+
+      myTest.value = myTest.value === "OK" ? "NO" : "OK"
     }
   }
 

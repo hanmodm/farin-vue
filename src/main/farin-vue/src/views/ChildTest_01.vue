@@ -6,13 +6,14 @@
             v-ripple
             v-model="view.refInputTxt"
             :label="$commUtil.getMsg('lbl.etc.data1')" />
+        <span>{{ $attrs['my-test'] }}</span>
       </v-sheet>
     </v-col>
   </v-row>
 </template>
 
 <script setup>
-  import { reactive, onMounted, watch, computed } from 'vue'
+  import { reactive, onMounted, watch, computed, useAttrs } from 'vue'
 
   const props = defineProps({
      modelValue: Object
@@ -20,6 +21,7 @@
     ,DS_COMMONINFO: Array
   })
   const emit = defineEmits([ "update:modelValue" ])
+  const attrs = useAttrs()
   const view = reactive({})
   const viewMethod = {
     init() {
@@ -52,6 +54,8 @@
     //props.textVal = "변경함"  // 객체가 아닌 type 변수는 readonly임!
     //props.DS_COMMONINFO[0].nm = "이름을 바꿉니다."  // 외부에서도 변경된 값 유지함
     Object.assign(view, props.modelValue)
+    
+    attrs.onCallback()
   })
 
   function innerFunc() {

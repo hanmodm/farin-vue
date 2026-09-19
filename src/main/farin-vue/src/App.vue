@@ -25,6 +25,9 @@
         <RouterLink to="/tcpIpSendTest">{{ $t("lbl.menu.tcpIpSendTest") }}</RouterLink>
         <RouterLink to="/childTest">{{ $t("lbl.menu.childTest") }}</RouterLink>
       </nav>
+      <nav class="ml-2">
+        <RouterLink to="/dxGridTest">{{ $t("lbl.menu.dxGridTest") }}</RouterLink>
+      </nav>
     </div>
   </header>
 
@@ -93,6 +96,7 @@ nav a:first-of-type {
     margin-top: 1rem;
   }
 }
+
 </style>
 <script>
 export default {

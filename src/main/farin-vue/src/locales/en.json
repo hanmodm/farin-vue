@@ -15,7 +15,8 @@
             "stateTest": "State test",
             "tcpIpSendTest": "TCP/IP Client",
             "tcpIpServerTest": "TCP/IP Server",
-            "childTest": "Child inherit test"
+            "childTest": "Child inherit test",
+            "dxGridTest": "DxDataGrid Test"
         },
         "btn": {
             "viewServer": "Run ajax",
