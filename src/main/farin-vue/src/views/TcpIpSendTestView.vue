@@ -1,86 +1,44 @@
 <script setup>
   import { ref, onUnmounted, reactive } from 'vue'
+  import socketServer from '../utils/websocket'
 
-  const socketInfo = reactive({
-     instance: null
-    ,sendMessage: null
-    ,test: { value: null, enabled: true, visible: true }
-    ,receivedMessage: []
-    ,isConnected: false
-    ,async connect() {
-      if (socketInfo.isConnected) return
-      if (!socketInfo.server) {
-        alert("IP, PORT 정보를 입력해주세요.")
-        return
-      }
-      const ws = new WebSocket(`ws://${socketInfo.server}/socket`)
+  const { createSocket } = socketServer()
+  const sockets = ref([])
 
-      return new Promise((resolve, reject) => {
-        ws.onopen = () => {
-          socketInfo.instance = ws
-          socketInfo.isConnected = true
-          socketInfo.instance.onmessage = socketInfo.onReceivedMessage
-          socketInfo.instance.onclose = socketInfo.onClose
-          socketInfo.instance.onerror = socketInfo.onError
-          resolve(true)
-        }
-        ws.onerror=(e) => {
-          console.error(e)
-          socketInfo.instance = null
-          socketInfo.isConnected = false
-          resolve(false)
-        }
-      })
-    }
-    ,disconnect() {
-      try {
-        if (!!socketInfo.isConnected) {
-          socketInfo.instance.close()
-        }
-      } catch(e) {
-        console.error(e)
-      } finally {
-        socketInfo.isConnected = false
-        socketInfo.instance = null
-        socketInfo.receivedMessage = []
-      }
-    }
-    ,onReceivedMessage(v) {
-      let value = null
-      try { value = JSON.parse(v.data) } catch(e) { value = { message: v.data }}
-      if (value === false) {
-        alert("수신처 연결 정보가 존재하지 않습니다.")
-        return
-      }
-      socketInfo.receivedMessage.push(`수신: [${value.message}]`)
-      console.log(value)
-    }
-    ,onSendMessage() {
-      let addr = socketInfo.client?.trim().split(":")
-      if (!addr[0] || !addr[1] || !socketInfo.isConnected || (typeof(str) === "string" && (!str || !str.trim())) ) return
-      let sendMessage = JSON.stringify({ to: addr[0]+":"+addr[1], message: socketInfo.sendMessage})
-      socketInfo.instance.send(sendMessage)
-    }
-    ,onClose() {
-      socketInfo.isConnected = false
-      socketInfo.receivedMessage.push(socketInfo.server + ' 접속을 종료합니다.')
-    }
-    ,onError(e) {
-      console.error("웹소켓오류: ", e)
-      socketInfo.receivedMessage.push(`오류: [통신 오류 발생]`)
-    }
+  const view = reactive({
+    addr: `127.0.0.1:19302`
   })
 
-  const toggleTest = () => {
-    socketInfo.test.value = socketInfo.test.value === "변경" ? "원복" : "변경"
-    socketInfo.test.enabled = !socketInfo.test.enabled
+  const onConnect = async () => {
+    const socket = createSocket()
+
+    let addr = (view.addr ?? '').split(":")
+    if (addr.length === 2) {
+      await socket.connect(addr[0], addr[1])
+      if (socket.isConnected) {
+        sockets.value.push(socket)
+      } else {
+        alert("서버를 연결할 수 없습니다.")
+      }
+    }
   }
-  const toggleTest2 = () => {
-    socketInfo.test.visible = !socketInfo.test.visible
+
+  const onSendMessage = () => {
+    const socket = sockets.value?.[view.selected]
+    if (socket.isConnected) socket.instance.send(view.message)
+  }
+
+  const onDisconnect = () => {
+    const socket = sockets.value?.[view.selected]
+    if (!!socket) {
+      socket.disconnect()
+      sockets.value.splice(view.selected, 1)
+      view.selected = view.selected - 1 < 0 ? 0 : view.selected - 1
+    }
   }
 
   onUnmounted(() => {
-    socketInfo.disconnect()
+    //socketInfo.disconnect()
   })
 </script>
 
@@ -88,28 +46,41 @@
   <v-container>
     <v-row align="center" no-gutters>
         <v-col>
-          <v-text-field v-ripple label="IP:PORT 입력" v-model="socketInfo.server"></v-text-field>
+          <v-text-field v-ripple label="IP:PORT 입력" v-model="view.addr"></v-text-field>
         </v-col>
         <v-col style="margin-left:10px;">
-          <v-btn variant="outlined" @click="socketInfo.connect">연결</v-btn>
-          <v-btn variant="outlined" style="margin-left:4px;" @click="socketInfo.disconnect">끊기</v-btn>
+          <v-btn variant="outlined" @click="onConnect">연결</v-btn>
+          <v-btn variant="outlined" style="margin-left:4px;" @click="onDisconnect">끊기</v-btn>
         </v-col>
     </v-row>
     <v-row align="center" no-gutters>
       <v-col>
-        <v-text-field v-ripple label="수신처" v-model="socketInfo.client"></v-text-field>
-        <v-text-field v-ripple label="전송" v-model="socketInfo.sendMessage"></v-text-field>
-        <v-text-field v-ripple label="객체테스트" v-model="socketInfo.test.value" :disabled="!socketInfo.test.enabled" :style="{ display: socketInfo.test.visible ? '' : 'none' }"></v-text-field>
-        <v-btn variant="outlined" @click="socketInfo.onSendMessage">전송</v-btn>
-        <v-btn variant="outlined" @click="toggleTest">토글</v-btn>
-        <v-btn variant="outlined" @click="toggleTest2">숨김</v-btn>
+        <!-- <v-text-field v-ripple label="수신처" v-model="view.client"></v-text-field>
+        <v-text-field v-ripple label="전송" v-model="view.sendMessage"></v-text-field> -->
+        <!-- <v-text-field v-ripple label="객체테스트" v-model="socketInfo.test.value" :disabled="!socketInfo.test.enabled" :style="{ display: socketInfo.test.visible ? '' : 'none' }"></v-text-field> -->
+        <!-- <v-btn variant="outlined" @click="onSendMessage">전송</v-btn> -->
+        <!-- <v-btn variant="outlined" @click="toggleTest">토글</v-btn>
+        <v-btn variant="outlined" @click="toggleTest2">숨김</v-btn> -->
+
+        <v-btn 
+          v-for="(node, idx) in sockets" :key="idx"
+          variant="outlined"
+          :active="view.selected === idx"
+          @click="(e) => view.selected = e.target.textContent*1">{{ idx }}</v-btn>
+        <v-text-field v-ripple label="메세지" v-model="view.message"></v-text-field>
+        <v-btn
+          class="text-none text-body-large"
+          color="#5865f2"
+          size="small"
+          variant="flat"
+          @click="onSendMessage">전송</v-btn>
       </v-col>
     </v-row>
     <v-row>
       <v-col>
         <v-container>
           <ul>
-            <li v-for="(message, index) in socketInfo.onReceivedMessage" :key="index">{{ message }}</li>
+            <li v-for="(node, index) in sockets" :key="index">{{ node.receivedMessage }}</li>
           </ul>
         </v-container>
       </v-col>

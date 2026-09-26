@@ -3,6 +3,7 @@ import HomeView from '../views/HomeView.vue'
 import AjaxTestView from '../views/AjaxTestView.vue'
 import StateTestView from '../views/StateTestView.vue'
 import TcpIpSendTestView from '../views/TcpIpSendTestView.vue'
+import TcpIpSendTestView2 from '../views/TcpIpSendTestView2.vue'
 import ChildTest from '../views/ChildTest.vue'
 import DxGridTest from '../views/DxGridTest.vue'
 import DxDateTest from '../views/DxDateTest.vue'
@@ -37,6 +38,11 @@ const router = createRouter({
       path: '/tcpIpSendTest',
       name: '소켓송신',
       component: TcpIpSendTestView
+    },
+    {
+      path: '/tcpIpSendTest2',
+      name: '소켓송신2',
+      component: TcpIpSendTestView2
     },
     {
       path: '/childTest',

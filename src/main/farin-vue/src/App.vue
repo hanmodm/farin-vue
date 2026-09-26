@@ -23,6 +23,7 @@
       </nav>
       <nav class="ml-2">
         <RouterLink to="/tcpIpSendTest">{{ $t("lbl.menu.tcpIpSendTest") }}</RouterLink>
+        <RouterLink to="/tcpIpSendTest2">{{ $t("lbl.menu.tcpIpSendTest") + "2" }}</RouterLink>
         <RouterLink to="/childTest">{{ $t("lbl.menu.childTest") }}</RouterLink>
       </nav>
       <nav class="ml-2">
